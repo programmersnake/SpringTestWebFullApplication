@@ -1,2 +1,2 @@
 # SpringTestWebFullApplication
-Spring, Java, Web, Hibernate, Security
+Spring, Java, Web, Hibernate, PostgreSQL, Spring Security
