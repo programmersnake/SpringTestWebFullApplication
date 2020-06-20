@@ -12,7 +12,7 @@ public class JavaAppJDBC {
     static final String PASS = "1";
 
     public static void main(String[] argv) throws SQLException {
-        createDbUserTable();
+        getDbUserTable();
     }
 
 
@@ -52,7 +52,7 @@ public class JavaAppJDBC {
         Statement statement = null;
 
         String createTableSQL = "CREATE TABLE DBUSER("
-                + "USER_ID NUMBER(5) NOT NULL, "
+                + "USER_ID VARCHAR(80) NOT NULL, "
                 + "USERNAME VARCHAR(20) NOT NULL, "
                 + "CREATED_BY VARCHAR(20) NOT NULL, "
                 + "CREATED_DATE DATE NOT NULL, " + "PRIMARY KEY (USER_ID) "
@@ -75,5 +75,29 @@ public class JavaAppJDBC {
             }
         }
     }
+
+    private static void getDbUserTable() throws SQLException {
+        Connection dbConnection = null;
+        Statement statement = null;
+
+        String createTableSQL = "SELECT * FROM city";
+
+        try {
+            dbConnection = getDBConnection();
+            statement = dbConnection.createStatement();
+
+            System.out.println(statement.executeQuery(createTableSQL).getBlob(0));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+        }
+    }
+
 
 }
