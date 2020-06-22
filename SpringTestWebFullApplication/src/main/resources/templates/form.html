@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign in</title>
+</head>
+<body>
+<form action="#" th:action="@{/}" th:object="${person}" method="post">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}" /></td>
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+        </tr>
+        <tr>
+            <td>Age:</td>
+            <td><input type="text" th:field="*{age}" />
+            <td th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="password" th:field="*{pass}"/>
+            <td th:if="${#fields.hasErrors('pass')}" th:errors="*{pass}">Password Error</td>
+        </tr>
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

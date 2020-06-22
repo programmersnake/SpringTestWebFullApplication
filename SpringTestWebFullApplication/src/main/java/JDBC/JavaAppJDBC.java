@@ -1,9 +1,6 @@
 package JDBC;
 
-import java.sql.DriverManager;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class JavaAppJDBC {
 
@@ -80,22 +77,27 @@ public class JavaAppJDBC {
         Connection dbConnection = null;
         Statement statement = null;
 
-        String createTableSQL = "SELECT * FROM city";
+        String selectTableSQL = "SELECT city_name FROM city";
 
         try {
             dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
 
-            System.out.println(statement.executeQuery(createTableSQL).getBlob(0));
+            // выбираем данные с БД
+            ResultSet rs = statement.executeQuery(selectTableSQL);
+
+            // И если что то было получено то цикл while сработает
+            while (rs.next()) {
+                String city_name = rs.getString("city_name");
+                //int age = rs.getInt("age");
+                //int kolvo_people = rs.getInt("kolvo_people");
+
+                System.out.print("city_name: " + city_name);
+                //System.out.print("; age : " + age);
+                //System.out.println("; kolvo_people : " + kolvo_people);
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
-            if (dbConnection != null) {
-                dbConnection.close();
-            }
         }
     }
 
